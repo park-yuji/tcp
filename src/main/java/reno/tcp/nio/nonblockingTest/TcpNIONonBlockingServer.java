@@ -28,7 +28,7 @@ public class TcpNIONonBlockingServer {
             // 채널을 관리할 Selector 생성 및 서버 소켓 채널 등록
             // 서버 소켓 채널 : 서비스 포트에 접속하려는 클라이언트 접속 요청을 받아주는 역할 (on_accept 모드로 등록)
             Selector selector = Selector.open();
-            serverSocket.register(selector, SelectionKey.OP_ACCEPT);
+            serverSocket.register(selector, SelectionKey.OP_ACCEPT/* | SelectionKey.OP_WRITE*/);
 
             System.out.println("-------서버 접속 준비 완료 ---------");
             // 버퍼의 모니터 출력을 위한 출력 채널 생성
@@ -41,7 +41,7 @@ public class TcpNIONonBlockingServer {
             // 셀렉터가 서버 소켓 채널의 이벤트를 감지하도록 select() 메소드 실행
             // 이벤트 생길 시 Selector가 가지고 있는 SelectionKey들 중 이벤트가 발생한 채널의 객체만 모아둔 Set을 받음
             while(true){
-                // 이벤트 발생할 때 까지 스레드 블로킹
+                // 이벤트 발생할 때 까지 스레드 대기
                 selector.select();
 
                 // 발생한 이벤트들을 모두 Iterator에 담아줌
