@@ -1,6 +1,6 @@
 package reno.tcp.nio.blockingThreadPool;
 
-import javafx.application.Application;
+/*import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+import javafx.stage.Stage;*/
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -17,7 +17,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
-public class TcpNIOChatClient extends Application {
+public class TcpNIOChatClient /*extends Application*/ {
 
     SocketChannel socketChannel;
     InetAddress ia = null;
@@ -31,17 +31,17 @@ public class TcpNIOChatClient extends Application {
                     socketChannel.configureBlocking(true);
                     ia = InetAddress.getLocalHost();
                     socketChannel.connect(new InetSocketAddress(ia, 15002));
-                    Platform.runLater(() -> {
+                    /*Platform.runLater(() -> {
                         try {
                             displayText("[연결 완료: " + socketChannel.getRemoteAddress() + "]");
                             btnConn.setText("stop");
                             btnSend.setDisable(false);
                         } catch (Exception e) {
                         }
-                    });
+                    });*/
                 } catch (Exception e) {
-                    Platform.runLater(() -> displayText("[서버 통신 안됨]"));
-
+                    /*Platform.runLater(() -> displayText("[서버 통신 안됨]"));
+*/
                     if (socketChannel.isOpen()) {
                         stopClient();
                     }
@@ -56,11 +56,11 @@ public class TcpNIOChatClient extends Application {
 
     void stopClient() {
         try {
-            Platform.runLater(() -> {
+            /*Platform.runLater(() -> {
                 displayText("[연결 끊음]");
                 btnConn.setText("start");
                 btnSend.setDisable(true);
-            });
+            });*/
 
             if (socketChannel != null && socketChannel.isOpen()) {
                 socketChannel.close();
@@ -85,9 +85,9 @@ public class TcpNIOChatClient extends Application {
                 Charset charset = Charset.forName("UTF-8");
                 String data = charset.decode(byteBuffer).toString();
 
-                Platform.runLater(() -> displayText("[받기 완료] " + data));
+              /*  Platform.runLater(() -> displayText("[받기 완료] " + data));*/
             } catch (Exception e) {
-                Platform.runLater(() -> displayText("[서버 통신 안됨]"));
+               /* Platform.runLater(() -> displayText("[서버 통신 안됨]"));*/
                 stopClient();
                 break;
             }
@@ -103,9 +103,9 @@ public class TcpNIOChatClient extends Application {
                     Charset charset = Charset.forName("UTF-8");
                     ByteBuffer byteBuffer = charset.encode(data);
                     socketChannel.write(byteBuffer);
-                    Platform.runLater(() -> displayText("[보내기 완료]"));
+                    /*Platform.runLater(() -> displayText("[보내기 완료]"));*/
                 } catch (Exception e) {
-                    Platform.runLater(() -> displayText("[서버 통신 안됨]"));
+                   /* Platform.runLater(() -> displayText("[서버 통신 안됨]"));*/
                     stopClient();
                 }
             }
@@ -118,11 +118,11 @@ public class TcpNIOChatClient extends Application {
     ///////////////////////
     // UI 생성 코드
 
-    TextArea txtDisplay;
+   /* TextArea txtDisplay;
     TextField txtInput;
-    Button btnConn, btnSend;
+    Button btnConn, btnSend;*/
 
-    @Override
+   /* @Override
     public void start(Stage primaryStage) throws Exception {
         BorderPane root = new BorderPane();
         root.setPrefSize(500, 300);
@@ -174,7 +174,7 @@ public class TcpNIOChatClient extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+*/
 
 
 

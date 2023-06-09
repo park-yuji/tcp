@@ -1,13 +1,13 @@
 package reno.tcp.nio.blockingThreadPool;
 
-import javafx.application.Application;
+/*import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+import javafx.stage.Stage;*/
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -21,7 +21,7 @@ import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class TcpNIOChatServer extends Application{
+public class TcpNIOChatServer /* extends Application*/{
 
         ExecutorService executorService;  // 스레드풀
         ServerSocketChannel serverSocketChannel;
@@ -48,10 +48,10 @@ public class TcpNIOChatServer extends Application{
             Runnable runnable = new Runnable() {
                 @Override
                 public void  run(){
-                    Platform.runLater(() -> {
+                    /*Platform.runLater(() -> {
                         displayText("[서버 시작]");
                         btnStartStop.setText("stop");
-                    });
+                    });*/
 
                     // ServerSocketChannel은 반복해서 클라이언트 연결 요청을 받아야함. accept() 메소드 반복 호출
                     while(true){
@@ -62,7 +62,7 @@ public class TcpNIOChatServer extends Application{
                             Client client = new Client(socketChannel);
                             connections.add(client);
 
-                            Platform.runLater(()->displayText("[연결 개수 :" + connections.size() + "]"));
+                            /*Platform.runLater(()->displayText("[연결 개수 :" + connections.size() + "]"));*/
 
                         }catch(Exception e){
                             if(serverSocketChannel.isOpen()){
@@ -99,10 +99,10 @@ public class TcpNIOChatServer extends Application{
                     executorService.shutdown();
                 }
 
-                Platform.runLater(()->{
+               /* Platform.runLater(()->{
                     displayText("[서버 종료]");
                     btnStartStop.setText("start");
-                });
+                });*/
 
 
 
@@ -142,7 +142,7 @@ public class TcpNIOChatServer extends Application{
 
                                 String msg = "[요청 처리: " + socketChannel.getRemoteAddress() + ": " + Thread.currentThread().getName() + "]";
 
-                                Platform.runLater(()->displayText(msg));
+                                /*Platform.runLater(()->displayText(msg));*/
 
                                 byteBuffer.flip();
                                 Charset charset = Charset.forName("UTF-8");
@@ -160,7 +160,7 @@ public class TcpNIOChatServer extends Application{
                                             socketChannel.getRemoteAddress() + ": " +
                                             Thread.currentThread().getName() + "]";
 
-                                    Platform.runLater(()->displayText(msg));
+                                    /*Platform.runLater(()->displayText(msg));*/
                                     socketChannel.close();
                                 } catch (IOException e2) {
 
@@ -190,7 +190,7 @@ public class TcpNIOChatServer extends Application{
                                 String msg = "[클라이언트 통신 안됨: " + socketChannel.getRemoteAddress() + ": "
                                         + Thread.currentThread().getName() + "]";
 
-                                Platform.runLater(() -> displayText(msg));
+                               /* Platform.runLater(() -> displayText(msg));*/
                                 connections.remove(Client.this);
                                 socketChannel.close();
 
@@ -205,7 +205,7 @@ public class TcpNIOChatServer extends Application{
         }
 
         // UI 생성코드
-        TextArea txtDisplay;
+      /*  TextArea txtDisplay;
         Button btnStartStop;
 
         @Override
@@ -248,6 +248,6 @@ public class TcpNIOChatServer extends Application{
         public static void main(String[] args) {
             launch(args);
         }
-
+*/
 
 }
